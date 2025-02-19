@@ -5,7 +5,8 @@ return {
   -- end,
   opts = {
     options = {
-      theme = "onedark",
+      -- theme = "onedark",
+      theme = "tokyonight",
     },
   },
 }
