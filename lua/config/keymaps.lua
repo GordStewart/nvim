@@ -54,6 +54,7 @@ map("n", "<Space>mw", "<CMD>lua require('config/utils').add_markdown_wikilink()<
 map("v", "<Space>mw", "<CMD>lua require('config/utils').add_markdown_wikilink()<CR>")
 map("n", "<Space>ml", "<CMD>lua require('config/utils').toggle_markdown_bp()<CR>")
 map("v", "<Space>mg", "<CMD>lua require('config/utils').book_to_get()<CR>")
+map("n", "<Space>mt", "<CMD>Mtoc<CR>", { desc = "Insert/Update ToC" })
 
 -- AutoIndent to appropriate position
 map("n", "i", function()

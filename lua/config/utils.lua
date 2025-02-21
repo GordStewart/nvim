@@ -36,32 +36,34 @@ function M.tidy_contents()
   vim.cmd([[silent! execute '/• \d\|trans\.\|as by']])
 end
 
+-- utility function to add a line of text
 function M.add_line(start_line, end_line, replacement)
   vim.api.nvim_buf_set_lines(0, start_line, end_line, true, { replacement })
 end
 
-function M.add_year(year)
-  local header = "Title • Year • Length • Author(s) • Series"
-
-  -- Set the cursor to beginning of buffer
-  vim.api.nvim_win_set_cursor(0, { 1, 0 })
-
-  -- If the first line is the header, delete it
-  local line = vim.api.nvim_get_current_line()
-  if line == header then
-    vim.api.nvim_del_current_line()
-  end
-
-  -- Add the year
-  local phrase = "silent! execute " .. "'%s/ • (\\@!/ • (" .. year .. ") • '"
-  vim.cmd(phrase)
-
-  -- Add the header back
-  M.add_line(0, 0, header)
-
-  -- Remove the stupid highlighting
-  vim.cmd("silent! execute 'noh'")
-end
+-- Can probably delete this, functionality was moved to importer.py
+-- function M.add_year(year)
+--   local header = "Title • Year • Length • Author(s) • Series"
+--
+--   -- Set the cursor to beginning of buffer
+--   vim.api.nvim_win_set_cursor(0, { 1, 0 })
+--
+--   -- If the first line is the header, delete it
+--   local line = vim.api.nvim_get_current_line()
+--   if line == header then
+--     vim.api.nvim_del_current_line()
+--   end
+--
+--   -- Add the year
+--   local phrase = "silent! execute " .. "'%s/ • (\\@!/ • (" .. year .. ") • '"
+--   vim.cmd(phrase)
+--
+--   -- Add the header back
+--   M.add_line(0, 0, header)
+--
+--   -- Remove the stupid highlighting
+--   vim.cmd("silent! execute 'noh'")
+-- end
 
 -- *************************** --
 -- Latex Bold / Italic
@@ -81,7 +83,6 @@ end
 -- end
 
 function M.add_italic()
-  local opts = {}
   local final_table = {}
   -- First check if we're in normal mode: if so, we want the current word
   local mode = vim.api.nvim_get_mode().mode
@@ -102,7 +103,6 @@ function M.add_italic()
 end
 
 function M.add_bold()
-  local opts = {}
   local final_table = {}
   -- First check if we're in normal mode: if so, we want the current word
   local mode = vim.api.nvim_get_mode().mode
@@ -123,7 +123,6 @@ function M.add_bold()
 end
 
 function M.add_markdown_wikilink()
-  local opts = {}
   local final_table = {}
   -- First check if we're in normal mode: if so, we want the current word
   local mode = vim.api.nvim_get_mode().mode
